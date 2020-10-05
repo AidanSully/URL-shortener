@@ -1,8 +1,23 @@
 // Require
 const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 // Init
 const app = express();
+
+// Body-parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// database key
+const db = require("./config/keys").mongoURI;
+
+// Connect to MongoDB
+mongoose
+  .connect(db)
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log(err));
 
 // Path
 app.get("/", (req, res) => {
