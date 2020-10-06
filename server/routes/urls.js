@@ -7,10 +7,7 @@ router.get("/:route", async (req, res) => {
   const instance = await Url.findOne({ id: route });
   if (instance) {
     console.log(instance);
-    res.status(200).json({
-      message: "Url found",
-      data: instance,
-    });
+    res.redirect(`//${instance.url}`)
   } else {
     console.log("Entry not found");
     res.status(404).json({
